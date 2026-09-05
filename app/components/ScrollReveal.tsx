@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -14,19 +13,14 @@ interface ScrollRevealProps {
   once?: boolean;
 }
 
-// Register GSAP ScrollTrigger safely on browser environment
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function ScrollReveal({
   children,
   className = "",
   animation = "fade-up",
   delay = 0,
-  duration = 1.1,
-  distance = 50,
-  once = true,
+  duration = 0.5,
+  distance = 25,
+  once = false,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,6 +28,7 @@ export default function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
+    // 1. Initial hidden state
     const initialProps: gsap.TweenVars = {
       opacity: 0,
     };
@@ -53,33 +48,53 @@ export default function ScrollReveal({
         break;
       case "zoom-in":
       case "scale-up":
-        initialProps.scale = 0.88;
+        initialProps.scale = 0.94;
         break;
     }
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        initialProps,
-        {
-          opacity: 1,
-          x: 0,
-          y: 0,
-          scale: 1,
-          duration: duration,
-          delay: delay,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 92%",
-            toggleActions: once ? "play none none none" : "play none none none",
-            once: once,
-          },
-        }
-      );
-    }, ref);
+    gsap.set(el, initialProps);
 
-    return () => ctx.revert();
+    // 2. IntersectionObserver handles live Scroll In and Scroll Out dynamically with fast 80px pre-trigger
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Scroll In: Animate fast & crisp to visible position
+            gsap.to(el, {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              scale: 1,
+              duration: duration,
+              delay: delay,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+            if (once) {
+              observer.unobserve(el);
+            }
+          } else if (!once) {
+            // Scroll Out: Animate out when leaving viewport
+            gsap.to(el, {
+              ...initialProps,
+              duration: 0.4,
+              ease: "power2.inOut",
+              overwrite: "auto",
+            });
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px 80px 0px",
+      }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
   }, [animation, delay, duration, distance, once]);
 
   return (

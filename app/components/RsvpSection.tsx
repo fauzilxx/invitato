@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollReveal from "./ScrollReveal";
 
 /**
@@ -169,17 +167,6 @@ export default function RsvpSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    if (isSubmitted) {
-      setTimeout(() => {
-        if (typeof window !== "undefined") {
-          gsap.registerPlugin(ScrollTrigger);
-          ScrollTrigger.refresh();
-        }
-      }, 150);
-    }
-  }, [isSubmitted]);
-
   const handleEventToggle = (eventId: string) => {
     setFormData((prev) => {
       const exists = prev.events.includes(eventId);
@@ -238,16 +225,16 @@ export default function RsvpSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#d4af37]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
       {/* Main Content Container wrapped in Ornate Gold Frame */}
-      <ScrollReveal animation="zoom-in" duration={1.1} className="relative z-10 w-full max-w-md mx-auto">
+      <ScrollReveal animation="zoom-in" duration={0.6} className="relative z-10 w-full max-w-md mx-auto">
         <OrnateGoldFrame>
           <div className="space-y-8">
             {/* Top Confirmation Script Header & Champagne Icon */}
-            <ScrollReveal animation="fade-down" delay={0.1} duration={0.9} className="flex flex-col items-center text-center space-y-2">
+            <div className="flex flex-col items-center text-center space-y-2">
               <ChampagneGlassesIcon className="w-14 h-14 sm:w-16 sm:h-16 mb-1" />
               <h2 className="font-script text-4xl sm:text-5xl text-[#f3e5ca] tracking-wide font-normal drop-shadow-[0_2px_12px_rgba(243,229,202,0.4)]">
                 Confirmation
               </h2>
-            </ScrollReveal>
+            </div>
 
         {isSubmitted ? (
           <div className="bg-[#22160F] p-8 rounded-2xl border border-[#f3e5ca]/50 text-center space-y-4 shadow-2xl animate-fade-in">
@@ -263,7 +250,7 @@ export default function RsvpSection() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-7 text-left">
             {/* 1. Name Field */}
-            <ScrollReveal animation="fade-up" delay={0.15} duration={0.8} className="space-y-1.5">
+            <div className="space-y-1.5">
               <label className="font-cormorant text-base sm:text-lg text-white/90 block">
                 Name:
               </label>
@@ -278,10 +265,10 @@ export default function RsvpSection() {
                 className="w-full bg-transparent border-b border-[#f3e5ca]/40 py-2 font-cormorant text-base text-white placeholder-white/40 focus:border-[#f3e5ca] outline-none transition-colors"
                 required
               />
-            </ScrollReveal>
+            </div>
 
             {/* 2. Phone Number Field */}
-            <ScrollReveal animation="fade-up" delay={0.25} duration={0.8} className="space-y-1.5">
+            <div className="space-y-1.5">
               <label className="font-cormorant text-base sm:text-lg text-white/90 block">
                 Phone Number:
               </label>
@@ -298,10 +285,10 @@ export default function RsvpSection() {
                   className="w-full bg-transparent font-cormorant text-base text-white placeholder-white/40 outline-none"
                 />
               </div>
-            </ScrollReveal>
+            </div>
 
             {/* 3. Address Field */}
-            <ScrollReveal animation="fade-up" delay={0.35} duration={0.8} className="space-y-1.5">
+            <div className="space-y-1.5">
               <label className="font-cormorant text-base sm:text-lg text-white/90 block">
                 Address:
               </label>
@@ -312,10 +299,10 @@ export default function RsvpSection() {
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                 className="w-full bg-transparent border-b border-[#f3e5ca]/40 py-2 font-cormorant text-base text-white placeholder-white/40 focus:border-[#f3e5ca] outline-none transition-colors"
               />
-            </ScrollReveal>
+            </div>
 
             {/* 4. Email Field */}
-            <ScrollReveal animation="fade-up" delay={0.45} duration={0.8} className="space-y-1.5">
+            <div className="space-y-1.5">
               <label className="font-cormorant text-base sm:text-lg text-white/90 block">
                 Email:
               </label>
@@ -326,10 +313,10 @@ export default function RsvpSection() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full bg-transparent border-b border-[#f3e5ca]/40 py-2 font-cormorant text-base text-white placeholder-white/40 focus:border-[#f3e5ca] outline-none transition-colors"
               />
-            </ScrollReveal>
+            </div>
 
             {/* 5. Attendance Question Tabs */}
-            <ScrollReveal animation="fade-up" delay={0.55} duration={0.8} className="space-y-2 pt-2">
+            <div className="space-y-2 pt-2">
               <label className="font-cormorant text-base sm:text-lg text-white/90 block">
                 Will you attend the wedding?
               </label>
@@ -357,11 +344,11 @@ export default function RsvpSection() {
                   Unable to Attend
                 </button>
               </div>
-            </ScrollReveal>
+            </div>
 
             {/* 6. Which Event Checkboxes */}
             {formData.attendance === "hadir" && (
-              <ScrollReveal animation="fade-up" delay={0.65} duration={0.8} className="space-y-3 pt-2">
+              <div className="space-y-3 pt-2">
                 <label className="font-cormorant text-base sm:text-lg text-white/90 block">
                   Which event will you attend?
                 </label>
@@ -394,12 +381,12 @@ export default function RsvpSection() {
                     );
                   })}
                 </div>
-              </ScrollReveal>
+              </div>
             )}
 
             {/* 7. Guest Count Select */}
             {formData.attendance === "hadir" && (
-              <ScrollReveal animation="fade-up" delay={0.75} duration={0.8} className="space-y-2 pt-2">
+              <div className="space-y-2 pt-2">
                 <label className="font-cormorant text-base sm:text-lg text-white/90 block">
                   How many guests will be attending?
                 </label>
@@ -417,7 +404,7 @@ export default function RsvpSection() {
                   </select>
                   <ChevronDown className="w-4 h-4 text-[#f3e5ca] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
-              </ScrollReveal>
+              </div>
             )}
 
             {errorMessage && (
@@ -430,7 +417,7 @@ export default function RsvpSection() {
             )}
 
             {/* Submit Button matching reference tone */}
-            <ScrollReveal animation="fade-up" delay={0.85} duration={0.8} className="pt-6">
+            <div className="pt-6">
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -438,7 +425,7 @@ export default function RsvpSection() {
               >
                 {isSubmitting ? "Sending..." : "Confirm RSVP"}
               </button>
-            </ScrollReveal>
+            </div>
           </form>
         )}
           </div>
