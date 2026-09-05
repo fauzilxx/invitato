@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
+  ),
   title: "The Wedding of Ricky & Fellycia by Invitato",
   description:
     "Together with joyful hearts, we are pleased to announce the beginning of this new chapter of our lives together. Website Invitation by Invitato.",
