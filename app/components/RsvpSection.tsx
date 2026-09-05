@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollReveal from "./ScrollReveal";
 
 /**
@@ -166,6 +168,17 @@ export default function RsvpSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setTimeout(() => {
+        if (typeof window !== "undefined") {
+          gsap.registerPlugin(ScrollTrigger);
+          ScrollTrigger.refresh();
+        }
+      }, 150);
+    }
+  }, [isSubmitted]);
 
   const handleEventToggle = (eventId: string) => {
     setFormData((prev) => {

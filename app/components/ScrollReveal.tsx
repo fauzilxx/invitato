@@ -26,7 +26,7 @@ export default function ScrollReveal({
   delay = 0,
   duration = 1.1,
   distance = 50,
-  once = false,
+  once = true,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -71,9 +71,9 @@ export default function ScrollReveal({
           ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 95%",
-            end: "bottom 5%",
-            toggleActions: once ? "play none none none" : "play reverse play reverse",
+            start: "top 92%",
+            toggleActions: once ? "play none none none" : "play none none none",
+            once: once,
           },
         }
       );
