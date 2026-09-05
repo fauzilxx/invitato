@@ -65,7 +65,7 @@ export default function MusicToggle() {
     };
 
     // Expose for HeroCoverSection's open button (guaranteed user gesture)
-    (window as any).__playAudio = unlock;
+    (window as unknown as { __playAudio?: () => void }).__playAudio = unlock;
 
     // Try unmuted play if user has interacted before (returning visitor / refresh)
     const hasInteractedBefore = !!localStorage.getItem(INTERACTED_KEY);
@@ -112,7 +112,7 @@ export default function MusicToggle() {
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      delete (window as any).__playAudio;
+      delete (window as unknown as { __playAudio?: () => void }).__playAudio;
       removeGestureListeners();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };

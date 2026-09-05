@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Download, ChevronLeft, ChevronRight, Search } from "lucide-react";
 
 interface RsvpItem {
@@ -28,28 +28,32 @@ export default function AdminRsvpsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isExporting, setIsExporting] = useState(false);
 
-  const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const params = new URLSearchParams({
-        page: String(page),
-        limit: String(PAGE_SIZE),
-        filter,
-      });
-      const res = await fetch(`/api/admin/rsvps?${params}`);
-      const json = await res.json();
-      if (json.success) {
-        setData(json.data);
-        setTotal(json.total);
-        setTotalPages(json.totalPages);
+  useEffect(() => {
+    let isMounted = true;
+    const load = async () => {
+      setIsLoading(true);
+      try {
+        const params = new URLSearchParams({
+          page: String(page),
+          limit: String(PAGE_SIZE),
+          filter,
+        });
+        const res = await fetch(`/api/admin/rsvps?${params}`);
+        const json = await res.json();
+        if (isMounted && json.success) {
+          setData(json.data);
+          setTotal(json.total);
+          setTotalPages(json.totalPages);
+        }
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
+    };
+    load();
+    return () => {
+      isMounted = false;
+    };
   }, [page, filter]);
-
-  useEffect(() => { fetchData(); }, [fetchData]);
-  useEffect(() => { setPage(1); }, [filter]);
 
   const handleExportCsv = async () => {
     setIsExporting(true);
@@ -115,7 +119,10 @@ export default function AdminRsvpsPage() {
           {(["all", "hadir", "tidak_hadir"] as const).map((f) => (
             <button
               key={f}
-              onClick={() => setFilter(f)}
+              onClick={() => {
+                setFilter(f);
+                setPage(1);
+              }}
               className={`px-4 py-2.5 font-cormorant text-sm transition-colors cursor-pointer ${
                 filter === f
                   ? "bg-[#d4af37]/15 text-[#d4af37]"

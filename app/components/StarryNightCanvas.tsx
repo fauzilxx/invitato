@@ -53,7 +53,7 @@ export default function StarryNightCanvas() {
     let height = 0;
 
     let stars: Star[] = [];
-    let shootingStars: ShootingStar[] = [];
+    const shootingStars: ShootingStar[] = [];
     let nextSpawnTime = 10; // Spawn first shooting star quickly after load
 
     const COLORS = [

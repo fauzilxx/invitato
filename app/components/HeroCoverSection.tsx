@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { ChevronDown, MailOpen } from "lucide-react";
 import { gsap } from "gsap";
 import { HERO_IMAGES, COUPLE } from "../lib/config";
 import { ASSETS } from "../lib/assets";
 
 interface HeroCoverSectionProps {
-  isOpen: boolean;
   onOpen: () => void;
 }
 
@@ -17,7 +15,6 @@ interface HeroCoverSectionProps {
  * Features 100% seamless entrance GSAP sequence & exit unveil transition.
  */
 export default function HeroCoverSection({
-  isOpen,
   onOpen,
 }: HeroCoverSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +26,9 @@ export default function HeroCoverSection({
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const onOpenRef = useRef(onOpen);
-  onOpenRef.current = onOpen;
+  useEffect(() => {
+    onOpenRef.current = onOpen;
+  }, [onOpen]);
 
   // 1. Entrance GSAP Animation Sequence on Mount
   useEffect(() => {
@@ -166,8 +165,9 @@ export default function HeroCoverSection({
           // Unlock scroll so user can manually scroll after clicking
           onOpenRef.current();
           // Play music (guaranteed user gesture)
-          if (typeof window !== "undefined" && typeof (window as any).__playAudio === "function") {
-            (window as any).__playAudio();
+          const win = window as unknown as { __playAudio?: () => void };
+          if (typeof window !== "undefined" && typeof win.__playAudio === "function") {
+            win.__playAudio();
           }
         }}
         className="relative z-30 pb-12 px-6 sm:px-10 flex flex-col items-center text-center cursor-pointer select-none group"

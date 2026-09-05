@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Download, ChevronLeft, ChevronRight, Search } from "lucide-react";
 
 interface WishItem {
@@ -21,26 +21,31 @@ export default function AdminWishesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isExporting, setIsExporting] = useState(false);
 
-  const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const params = new URLSearchParams({
-        page: String(page),
-        limit: String(PAGE_SIZE),
-      });
-      const res = await fetch(`/api/admin/wishes?${params}`);
-      const json = await res.json();
-      if (json.success) {
-        setData(json.data);
-        setTotal(json.total);
-        setTotalPages(json.totalPages);
+  useEffect(() => {
+    let isMounted = true;
+    const load = async () => {
+      setIsLoading(true);
+      try {
+        const params = new URLSearchParams({
+          page: String(page),
+          limit: String(PAGE_SIZE),
+        });
+        const res = await fetch(`/api/admin/wishes?${params}`);
+        const json = await res.json();
+        if (isMounted && json.success) {
+          setData(json.data);
+          setTotal(json.total);
+          setTotalPages(json.totalPages);
+        }
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
+    };
+    load();
+    return () => {
+      isMounted = false;
+    };
   }, [page]);
-
-  useEffect(() => { fetchData(); }, [fetchData]);
 
   const handleExportCsv = async () => {
     setIsExporting(true);

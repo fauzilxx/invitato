@@ -48,9 +48,6 @@ export default function DesktopLeftPanel() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-      // Select accordion panels
-      const panels = galleryWrapperRef.current?.querySelectorAll(".ag-panel");
-
       // 1. Header elements entrance from top
       tl.fromTo(
         headerSubRef.current,

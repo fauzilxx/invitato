@@ -95,10 +95,9 @@ const DriftWall = ({
   const [containerHeight, setContainerHeight] = useState(1000);
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeIdRef = useRef<string | null>(null);
-  const [reduced, setReduced] = useState(false);
+  const [reduced, setReduced] = useState(() => prefersReducedMotion());
 
   useEffect(() => {
-    setReduced(prefersReducedMotion());
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
     mq.addEventListener("change", onChange);
@@ -269,6 +268,7 @@ const DriftWall = ({
   const renderTile = (item: DriftWallItem, id: string, colIndex: number) => {
     const inner = (
       <span className="drift-wall__inner">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={item.image} alt={item.title ?? ""} loading="lazy" decoding="async" draggable={false} />
         <span className="drift-wall__overlay" aria-hidden="true" />
       </span>

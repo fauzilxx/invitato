@@ -52,7 +52,7 @@ export default function Home() {
       {/* Main Right Scrollable Content Stream (Always Natural Dimensions) */}
       <div className="w-full lg:w-[460px] xl:w-[480px] lg:ml-auto min-h-screen flex flex-col relative z-20 shadow-2xl bg-[#D5DADE]">
         {/* Cover Section */}
-        <HeroCoverSection isOpen={isOpen} onOpen={handleOpenInvitation} />
+        <HeroCoverSection onOpen={handleOpenInvitation} />
 
         {/* Content Stream (Revealed / Scrollable) */}
         <CoupleSection />

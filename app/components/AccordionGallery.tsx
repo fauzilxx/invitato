@@ -69,7 +69,6 @@ const AccordionGallery = ({
   const mediaRefs = useRef<(HTMLElement | null)[]>([]);
   const barRefs = useRef<(HTMLElement | null)[]>([]);
   const textRefs = useRef<(HTMLElement | null)[]>([]);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
   const firstRunRef = useRef(true);
   const mediaSizeRef = useRef(320);
 
@@ -265,6 +264,7 @@ const AccordionGallery = ({
                   mediaRefs.current[i] = el;
                 }}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.image} alt={item.alt || item.label || ''} draggable={false} />
               </span>
               <span className="ag-panel__overlay" aria-hidden="true" />

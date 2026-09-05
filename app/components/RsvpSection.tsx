@@ -209,7 +209,7 @@ export default function RsvpSection() {
         const data = await res.json();
         setErrorMessage(data.message || "Failed to confirm attendance.");
       }
-    } catch (err) {
+    } catch {
       setErrorMessage("A network error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);

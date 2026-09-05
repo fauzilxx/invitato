@@ -43,7 +43,31 @@ export default function WishesSection() {
   };
 
   useEffect(() => {
-    fetchWishes();
+    let isMounted = true;
+    const load = async () => {
+      setIsLoading(true);
+      setFetchError("");
+      try {
+        const res = await fetch("/api/wishes");
+        const data = await res.json();
+        if (isMounted) {
+          if (data.success && Array.isArray(data.data)) {
+            setWishes(data.data.slice(0, 5));
+          } else {
+            setFetchError(
+              data.message || "Ucapan belum dapat dimuat. Silakan coba lagi nanti."
+            );
+          }
+        }
+      } catch {
+        if (isMounted) {
+          setFetchError("Tidak dapat terhubung ke server. Periksa koneksi internet Anda.");
+        }
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    };
+    load();
 
     // Subscribe to Supabase Realtime — ucapan baru langsung muncul tanpa refresh
     const channel = supabase
@@ -64,6 +88,7 @@ export default function WishesSection() {
       .subscribe();
 
     return () => {
+      isMounted = false;
       supabase.removeChannel(channel);
     };
   }, []);
