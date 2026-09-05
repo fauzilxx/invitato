@@ -86,13 +86,18 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error("Supabase Wishes Insert Error:", error);
 
-      // Deteksi tabel belum dibuat
-      if (error.code === "PGRST205" || error.message?.includes("schema cache")) {
+      // Deteksi tabel belum dibuat / error RLS / error database
+      if (
+        error.code === "PGRST205" ||
+        error.message?.includes("schema cache") ||
+        error.message?.includes("does not exist")
+      ) {
         return NextResponse.json(
           {
             success: false,
             message:
-              "Fitur ucapan sedang dalam persiapan. Silakan coba lagi dalam beberapa saat.",
+              "Tabel 'wishes' belum disiapkan di Supabase. Silakan jalankan SQL Migration di Supabase Dashboard.",
+            errorDetails: error.message,
           },
           { status: 503 }
         );
@@ -101,8 +106,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message:
-            "Ucapan gagal tersimpan. Silakan coba beberapa saat lagi.",
+          message: error.message || "Ucapan gagal tersimpan. Silakan coba beberapa saat lagi.",
+          errorDetails: error.message,
         },
         { status: 500 }
       );

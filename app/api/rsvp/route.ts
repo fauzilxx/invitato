@@ -57,12 +57,17 @@ export async function POST(request: NextRequest) {
       console.error("Supabase RSVP Insert Error:", error);
 
       // Fallback ramah: cek apakah tabel belum dibuat
-      if (error.code === "PGRST205" || error.message?.includes("schema cache")) {
+      if (
+        error.code === "PGRST205" ||
+        error.message?.includes("schema cache") ||
+        error.message?.includes("does not exist")
+      ) {
         return NextResponse.json(
           {
             success: false,
             message:
-              "Sistem sedang dalam tahap persiapan. Silakan hubungi kami secara langsung atau coba beberapa saat lagi.",
+              "Tabel 'rsvps' belum disiapkan di Supabase. Silakan jalankan SQL Migration di Supabase Dashboard.",
+            errorDetails: error.message,
           },
           { status: 503 }
         );
@@ -72,7 +77,9 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           message:
+            error.message ||
             "Konfirmasi kehadiran gagal disimpan. Silakan coba lagi dalam beberapa menit.",
+          errorDetails: error.message,
         },
         { status: 500 }
       );

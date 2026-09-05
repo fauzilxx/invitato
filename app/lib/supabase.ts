@@ -6,11 +6,17 @@ const supabaseUrl =
     ? process.env.NEXT_PUBLIC_SUPABASE_URL
     : "https://placeholder.supabase.co";
 
-const supabaseAnonKey =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key";
+const supabaseKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "placeholder-anon-key";
 
 /**
  * Supabase client for browser & server usage.
- * Uses the anon key — RLS policies control access.
+ * Uses service role key when available on server, or anon key.
  */
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    persistSession: false,
+  },
+});
