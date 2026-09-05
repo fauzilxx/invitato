@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { COUPLE } from "../lib/config";
+import { ASSETS } from "../lib/assets";
 import ScrollReveal from "./ScrollReveal";
 
 /**
@@ -32,7 +33,7 @@ export default function CoupleSection() {
         }}
       >
         <Image
-          src="/assets/flower-gold.png"
+          src={ASSETS.flowerGold}
           alt="Glowing Golden Flower"
           fill
           priority
@@ -64,7 +65,7 @@ export default function CoupleSection() {
         {/* Full-Width Diagonal Satin Ribbon Background */}
         <div className="absolute -inset-x-40 top-1/2 -translate-y-1/2 h-[300px] sm:h-[350px] bg-[#faf8f5] shadow-2xl z-10 overflow-hidden border-y border-white/20 transform rotate-[14deg] scale-130 pointer-events-none">
           <Image
-            src="/assets/background.jpg"
+            src={ASSETS.bg}
             alt="Satin Texture"
             fill
             priority
@@ -78,7 +79,7 @@ export default function CoupleSection() {
           {/* Card Stack 3 (Back Photo) */}
           <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-md border-2 border-white/90 transform translate-x-5 -translate-y-5 opacity-80 pointer-events-none transition-transform group-hover:translate-x-7 group-hover:-translate-y-7">
             <Image
-              src="/assets/4.png"
+              src={ASSETS.gallery[3]}
               alt="Pre-wedding photo"
               fill
               priority
@@ -90,7 +91,7 @@ export default function CoupleSection() {
           {/* Card Stack 2 (Middle Photo) */}
           <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white/90 transform translate-x-2.5 -translate-y-2.5 opacity-90 pointer-events-none transition-transform group-hover:translate-x-3.5 group-hover:-translate-y-3.5">
             <Image
-              src="/assets/10.png"
+              src={ASSETS.gallery[9]}
               alt="Pre-wedding photo"
               fill
               priority
@@ -117,7 +118,7 @@ export default function CoupleSection() {
           {/* Card Stack 3 (Back Photo) */}
           <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-md border-2 border-white/90 transform -translate-x-5 -translate-y-5 opacity-80 pointer-events-none transition-transform group-hover:-translate-x-7 group-hover:-translate-y-7">
             <Image
-              src="/assets/9.png"
+              src={ASSETS.gallery[8]}
               alt="Pre-wedding photo"
               fill
               priority
@@ -129,7 +130,7 @@ export default function CoupleSection() {
           {/* Card Stack 2 (Middle Photo) */}
           <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white/90 transform -translate-x-2.5 -translate-y-2.5 opacity-90 pointer-events-none transition-transform group-hover:-translate-x-3.5 group-hover:-translate-y-3.5">
             <Image
-              src="/assets/3.png"
+              src={ASSETS.gallery[2]}
               alt="Pre-wedding photo"
               fill
               priority
@@ -164,7 +165,7 @@ export default function CoupleSection() {
         }}
       >
         <Image
-          src="/assets/flower-gold.png"
+          src={ASSETS.flowerGold}
           alt="Glowing Golden Flower"
           fill
           sizes="384px"

@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, useCallback, CSSProperties, KeyboardEvent, MouseEvent } from 'react';
 import { gsap } from 'gsap';
+import { ASSETS } from '../lib/assets';
 
 import './AccordionGallery.css';
 
@@ -35,11 +36,11 @@ export interface AccordionGalleryProps {
 }
 
 const DEFAULT_ITEMS: AccordionGalleryItem[] = [
-  { image: '/assets/1.png', label: 'On The Deck', alt: 'Pre-wedding Yacht' },
-  { image: '/assets/2.png', label: 'Golden Hour', alt: 'Pre-wedding Lounge' },
-  { image: '/assets/3.png', label: 'Elegance', alt: 'Pre-wedding White Wall' },
-  { image: '/assets/4.png', label: 'Black Tie', alt: 'Pre-wedding Tuxedo' },
-  { image: '/assets/7.png', label: 'Together Forever', alt: 'Pre-wedding Outdoor' }
+  { image: ASSETS.gallery[0], label: 'On The Deck', alt: 'Pre-wedding Yacht' },
+  { image: ASSETS.gallery[1], label: 'Golden Hour', alt: 'Pre-wedding Lounge' },
+  { image: ASSETS.gallery[2], label: 'Elegance', alt: 'Pre-wedding White Wall' },
+  { image: ASSETS.gallery[3], label: 'Black Tie', alt: 'Pre-wedding Tuxedo' },
+  { image: ASSETS.gallery[6], label: 'Together Forever', alt: 'Pre-wedding Outdoor' }
 ];
 
 const AccordionGallery = ({

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { MAPS, EVENT } from "../lib/config";
+import { ASSETS } from "../lib/assets";
 
 /**
  * MapSection: Custom venue photo collage (1 Building Exterior + 2 Interior Ballrooms) + Directions button.
@@ -29,7 +30,7 @@ export default function MapSection() {
             {/* Left Side: 1 Vertical Building Exterior Photo */}
             <div className="relative h-full w-full group overflow-hidden">
               <Image
-                src="/assets/venue-exterior.png"
+                src={ASSETS.venueExterior}
                 alt="Hotel & Venue Building Exterior"
                 fill
                 priority
@@ -43,7 +44,7 @@ export default function MapSection() {
               {/* Top Interior Photo: Grand Ballroom */}
               <div className="relative h-full w-full group overflow-hidden">
                 <Image
-                  src="/assets/venue-ballroom.png"
+                  src={ASSETS.venueBallroom}
                   alt="Grand Ballroom Interior Setup"
                   fill
                   sizes="(max-width: 768px) 50vw, 240px"
@@ -54,7 +55,7 @@ export default function MapSection() {
               {/* Bottom Interior Photo: Chapel Venue */}
               <div className="relative h-full w-full group overflow-hidden">
                 <Image
-                  src="/assets/venue-chapel.png"
+                  src={ASSETS.venueChapel}
                   alt="Glass Chapel House Interior Setup"
                   fill
                   sizes="(max-width: 768px) 50vw, 240px"

@@ -1,6 +1,7 @@
 "use client";
 
 import { CSSProperties, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { ASSETS } from "../lib/assets";
 import "./DriftWall.css";
 
 export interface DriftWallItem {
@@ -40,13 +41,10 @@ interface ColumnMeta {
   copies: number;
 }
 
-const DEFAULT_ITEMS: DriftWallItem[] = Array.from({ length: 8 }, (_, i) => {
-  const ids = [1, 2, 3, 4, 7, 8, 9, 10];
-  return {
-    image: `/assets/${ids[i]}.png`,
-    title: `Pre-wedding Moment ${ids[i]}`,
-  };
-});
+const DEFAULT_ITEMS: DriftWallItem[] = [1, 2, 3, 4, 7, 8, 9, 10].map((id, i) => ({
+  image: ASSETS.gallery[i],
+  title: `Pre-wedding Moment ${id}`,
+}));
 
 const prefersReducedMotion = (): boolean =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

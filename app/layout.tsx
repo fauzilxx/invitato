@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "The Wedding of Ricky & Fellycia by Invitato",
     description:
       "Together with joyful hearts, we are pleased to announce the beginning of this new chapter of our lives together.",
-    images: ["/assets/1.png"],
+    images: ["https://nsavesotzraemkpblmyj.supabase.co/storage/v1/object/public/wedding-assets/assets/1.png"],
   },
 };
 

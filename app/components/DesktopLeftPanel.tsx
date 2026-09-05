@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import AccordionGallery from "./AccordionGallery";
 import { COUPLE, QUOTE } from "../lib/config";
+import { ASSETS } from "../lib/assets";
 
 /**
  * DesktopLeftPanel: Fixed left side banner for Desktop view.
@@ -19,22 +20,22 @@ export default function DesktopLeftPanel() {
 
   const leftGalleryItems = [
     {
-      image: "/assets/1.png",
+      image: ASSETS.gallery[0],
       label: "Ocean Pre-wedding",
       alt: "Ricky & Fellycia on the yacht",
     },
     {
-      image: "/assets/2.png",
+      image: ASSETS.gallery[1],
       label: "Golden Hour Romance",
       alt: "Ricky & Fellycia in lounge",
     },
     {
-      image: "/assets/3.png",
+      image: ASSETS.gallery[2],
       label: "Pure Elegance",
       alt: "Ricky & Fellycia classic pose",
     },
     {
-      image: "/assets/9.png",
+      image: ASSETS.gallery[8],
       label: "Studio Portrait",
       alt: "Ricky & Fellycia studio shot",
     },

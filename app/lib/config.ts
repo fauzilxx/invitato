@@ -3,21 +3,23 @@
  * Styled for luxury, modern-futuristic aesthetic matching Invitato reference.
  */
 
+import { ASSETS } from "./assets";
+
 export const COUPLE = {
   groom: {
     name: "Ricky",
     fullName: "Ricky Bastila",
     parentage: "Putra dari Bapak Handoko & Ibu Susanti",
-    photo: "/assets/5.png",
+    photo: ASSETS.gallery[4], // photo 5
   },
   bride: {
     name: "Fellycia",
     fullName: "Felicia Wijaya",
     parentage: "Putri dari Bapak Wijaya & Ibu Liana",
-    photo: "/assets/6.png",
+    photo: ASSETS.gallery[5], // photo 6
   },
   hashtag: "#RickyFellinlove",
-} as const;
+};
 
 export const EVENT = {
   date: "Sabtu, 25 Desember 2026",
@@ -126,23 +128,23 @@ export const QUOTE = {
 } as const;
 
 export const HERO_IMAGES = {
-  desktopLeft: "/assets/1.png", // Yacht couple photo for left preview panel
-  mobileCover: "/assets/8.png",  // Evening pre-wedding photo for mobile & right cover
-  coverRight: "/assets/8.png",  // Evening pre-wedding photo for right cover section
-} as const;
+  desktopLeft: ASSETS.gallery[0], // Yacht couple photo for left preview panel
+  mobileCover: ASSETS.gallery[7], // Evening pre-wedding photo for mobile & right cover
+  coverRight:  ASSETS.gallery[7], // Evening pre-wedding photo for right cover section
+};
 
 export const GALLERY_IMAGES = [
-  { src: "/assets/1.png", alt: "Ricky & Fellycia - Pre-wedding Yacht 1" },
-  { src: "/assets/2.png", alt: "Ricky & Fellycia - Pre-wedding Lounge 2" },
-  { src: "/assets/3.png", alt: "Ricky & Fellycia - Pre-wedding White Wall 3" },
-  { src: "/assets/4.png", alt: "Ricky & Fellycia - Pre-wedding Black Tux 4" },
-  { src: "/assets/5.png", alt: "Ricky & Fellycia - Groom with Doberman" },
-  { src: "/assets/6.png", alt: "Ricky & Fellycia - Bride Portrait" },
-  { src: "/assets/7.png", alt: "Ricky & Fellycia - Pre-wedding Outdoors 7" },
-  { src: "/assets/8.png", alt: "Ricky & Fellycia - Pre-wedding Evening 8" },
-  { src: "/assets/9.png", alt: "Ricky & Fellycia - Pre-wedding Studio 9" },
-  { src: "/assets/10.png", alt: "Ricky & Fellycia - Pre-wedding Romantic 10" },
-] as const;
+  { src: ASSETS.gallery[0], alt: "Ricky & Fellycia - Pre-wedding Yacht 1" },
+  { src: ASSETS.gallery[1], alt: "Ricky & Fellycia - Pre-wedding Lounge 2" },
+  { src: ASSETS.gallery[2], alt: "Ricky & Fellycia - Pre-wedding White Wall 3" },
+  { src: ASSETS.gallery[3], alt: "Ricky & Fellycia - Pre-wedding Black Tux 4" },
+  { src: ASSETS.gallery[4], alt: "Ricky & Fellycia - Groom with Doberman" },
+  { src: ASSETS.gallery[5], alt: "Ricky & Fellycia - Bride Portrait" },
+  { src: ASSETS.gallery[6], alt: "Ricky & Fellycia - Pre-wedding Outdoors 7" },
+  { src: ASSETS.gallery[7], alt: "Ricky & Fellycia - Pre-wedding Evening 8" },
+  { src: ASSETS.gallery[8], alt: "Ricky & Fellycia - Pre-wedding Studio 9" },
+  { src: ASSETS.gallery[9], alt: "Ricky & Fellycia - Pre-wedding Romantic 10" },
+];
 
-export const MUSIC_URL = "/music/sparkle.mp3";
+export const MUSIC_URL = ASSETS.music;
 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChevronDown, MailOpen } from "lucide-react";
 import { gsap } from "gsap";
 import { HERO_IMAGES, COUPLE } from "../lib/config";
+import { ASSETS } from "../lib/assets";
 
 interface HeroCoverSectionProps {
   isOpen: boolean;
@@ -116,7 +117,7 @@ export default function HeroCoverSection({
         ref={frameRef}
         className="absolute inset-0 z-20 pointer-events-none animate-bloom-pulse"
         style={{
-          backgroundImage: "url('/assets/frame-floral.png')",
+          backgroundImage: `url('${ASSETS.frameFloral}')`,
           backgroundSize: "100% 100%",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -174,7 +175,7 @@ export default function HeroCoverSection({
         <div className="flex flex-col items-center justify-center space-y-2">
           <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/60 shadow-[0_0_25px_rgba(255,255,255,0.4)] flex items-center justify-center animate-bounce group-hover:bg-white/30 transition-all">
             <Image
-              src="/assets/noun_scrolldown_111854_@700.png"
+              src={ASSETS.scrollDown}
               alt="Scroll Down Icon"
               width={34}
               height={34}

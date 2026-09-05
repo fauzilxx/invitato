@@ -3,6 +3,7 @@
 import DriftWall, { DriftWallItem } from "./DriftWall";
 import ScrollReveal from "./ScrollReveal";
 import StarryNightCanvas from "./StarryNightCanvas";
+import { ASSETS } from "../lib/assets";
 
 /**
  * GallerySection: Pre-wedding photo gallery using React Bits 3D DriftWall.
@@ -10,14 +11,14 @@ import StarryNightCanvas from "./StarryNightCanvas";
  */
 export default function GallerySection() {
   // Excluded: photos 5 & 6. Required in ALL columns: 8 photos (1, 2, 3, 4, 7, 8, 9, 10)
-  const p1 = { image: "/assets/1.png", title: "Pre-wedding Moment 1" };
-  const p2 = { image: "/assets/2.png", title: "Pre-wedding Moment 2" };
-  const p3 = { image: "/assets/3.png", title: "Pre-wedding Moment 3" };
-  const p4 = { image: "/assets/4.png", title: "Pre-wedding Moment 4" };
-  const p7 = { image: "/assets/7.png", title: "Pre-wedding Moment 7" };
-  const p8 = { image: "/assets/8.png", title: "Pre-wedding Moment 8" };
-  const p9 = { image: "/assets/9.png", title: "Pre-wedding Moment 9" };
-  const p10 = { image: "/assets/10.png", title: "Pre-wedding Moment 10" };
+  const p1 = { image: ASSETS.gallery[0], title: "Pre-wedding Moment 1" };
+  const p2 = { image: ASSETS.gallery[1], title: "Pre-wedding Moment 2" };
+  const p3 = { image: ASSETS.gallery[2], title: "Pre-wedding Moment 3" };
+  const p4 = { image: ASSETS.gallery[3], title: "Pre-wedding Moment 4" };
+  const p7 = { image: ASSETS.gallery[6], title: "Pre-wedding Moment 7" };
+  const p8 = { image: ASSETS.gallery[7], title: "Pre-wedding Moment 8" };
+  const p9 = { image: ASSETS.gallery[8], title: "Pre-wedding Moment 9" };
+  const p10 = { image: ASSETS.gallery[9], title: "Pre-wedding Moment 10" };
 
   // 3 Columns: Each column MUST contain ALL 8 photos in a unique sequence/order
   const galleryColumns: DriftWallItem[][] = [

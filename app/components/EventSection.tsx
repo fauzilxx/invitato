@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Calendar, MapPin } from "lucide-react";
 import { EVENT, TIMELINE, COUPLE, MAPS } from "../lib/config";
+import { ASSETS } from "../lib/assets";
 import WebThreads from "./WebThreads";
 import FireworksCanvas from "./FireworksCanvas";
 import CountdownSection from "./CountdownSection";
@@ -230,7 +231,7 @@ export default function EventSection() {
         }}
       >
         <Image
-          src="/assets/golden-moon.jpg"
+          src={ASSETS.goldenMoon}
           alt="Glowing Golden Moon"
           fill
           priority
@@ -379,7 +380,7 @@ export default function EventSection() {
             {/* Left Side: 1 Vertical Building Exterior Photo */}
             <div className="relative h-full w-full group overflow-hidden">
               <Image
-                src="/assets/venue-exterior.png"
+                src={ASSETS.venueExterior}
                 alt="Hotel & Venue Building Exterior"
                 fill
                 priority
@@ -393,7 +394,7 @@ export default function EventSection() {
               {/* Top Interior Photo: Grand Ballroom */}
               <div className="relative h-full w-full group overflow-hidden">
                 <Image
-                  src="/assets/venue-ballroom.png"
+                  src={ASSETS.venueBallroom}
                   alt="Grand Ballroom Interior Setup"
                   fill
                   sizes="(max-width: 768px) 50vw, 240px"
@@ -404,7 +405,7 @@ export default function EventSection() {
               {/* Bottom Interior Photo: Chapel Venue */}
               <div className="relative h-full w-full group overflow-hidden">
                 <Image
-                  src="/assets/venue-chapel.png"
+                  src={ASSETS.venueChapel}
                   alt="Glass Chapel House Interior Setup"
                   fill
                   sizes="(max-width: 768px) 50vw, 240px"

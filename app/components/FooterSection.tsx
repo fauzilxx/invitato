@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { COUPLE } from "../lib/config";
+import { ASSETS } from "../lib/assets";
 import ScrollReveal from "./ScrollReveal";
 
 /**
@@ -47,7 +48,7 @@ export default function FooterSection() {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Thin Fabric Texture Layer */}
         <Image
-          src="/assets/background.jpg"
+          src={ASSETS.bg}
           alt="Fabric Background Texture"
           fill
           priority
@@ -56,7 +57,7 @@ export default function FooterSection() {
         />
         {/* Main Photo 8.png */}
         <Image
-          src="/assets/8.png"
+          src={ASSETS.gallery[7]}
           alt={`${COUPLE.groom.name} & ${COUPLE.bride.name} Background`}
           fill
           priority
@@ -88,7 +89,7 @@ export default function FooterSection() {
         <div className="pt-1 flex justify-center items-center">
           <div className="relative w-56 h-56 sm:w-64 sm:h-64 filter drop-shadow-[0_0_18px_rgba(243,229,202,0.5)] transition-transform hover:scale-105">
             <Image
-              src="/assets/gold-bouquet-transparent.png"
+              src={ASSETS.goldBouquet}
               alt="Transparent Gold Flower Bouquet Logo"
               fill
               sizes="320px"
