@@ -59,6 +59,18 @@ export async function GET() {
  */
 export async function POST(request: NextRequest) {
   try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    if (!supabaseUrl || supabaseUrl.includes("placeholder")) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Koneksi Supabase belum dikonfigurasi. Silakan isi NEXT_PUBLIC_SUPABASE_URL dan NEXT_PUBLIC_SUPABASE_ANON_KEY di Environment Variables Vercel.",
+        },
+        { status: 503 }
+      );
+    }
+
     const body = await request.json();
 
     // 1. Validasi input dengan Zod
@@ -114,12 +126,17 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ success: true, data }, { status: 201 });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("Wishes API Error:", err);
+    const errMessage = err instanceof Error ? err.message : String(err);
+    const isFetchFailed = errMessage.includes("fetch failed");
+
     return NextResponse.json(
       {
         success: false,
-        message: "Terjadi gangguan pada server. Silakan coba lagi nanti.",
+        message: isFetchFailed
+          ? "Gagal terhubung ke Supabase. Silakan periksa URL Supabase pada Environment Variables Vercel."
+          : "Terjadi gangguan pada server. Silakan coba lagi nanti.",
       },
       { status: 500 }
     );
