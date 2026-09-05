@@ -1,26 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Great+Vibes&family=Jost:wght@300;400;500;600;700&family=Marcellus&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .font-marcellus {
+    font-family: 'Marcellus', serif;
+  }
+  .font-cormorant {
+    font-family: 'Cormorant Upright', serif;
+  }
+  .font-jost {
+    font-family: 'Jost', sans-serif;
+  }
+  .font-script {
+    font-family: 'Great Vibes', cursive;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-panel-dark {
+  background: rgba(10, 22, 40, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Custom Animations */
+@keyframes bounceDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-bounce-down {
+  animation: bounceDown 2s infinite ease-in-out;
+}
+
+/* Smooth Slow Flower Rotation Animation */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 36s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spinSlow 42s linear infinite reverse;
+}
+
+/* Luxurious Blooming Rose Pulse Effect */
+@keyframes bloomPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: sepia(0.85) hue-rotate(-15deg) saturate(2) brightness(1.25) contrast(1.1);
+  }
+  50% {
+    transform: scale(1.03);
+    filter: sepia(0.85) hue-rotate(-15deg) saturate(2.2) brightness(1.38) contrast(1.15);
+  }
+}
+
+.animate-bloom-pulse {
+  animation: bloomPulse 7s ease-in-out infinite;
+}
+
+/* Elegant Flower Bouquet Blooming & Radiance Animation */
+@keyframes bouquetBloom {
+  0%, 100% {
+    transform: scale(0.96) rotate(0deg);
+    filter: drop-shadow(0 0 12px rgba(243, 229, 202, 0.35));
+    opacity: 0.88;
+  }
+  50% {
+    transform: scale(1.08) rotate(1.5deg);
+    filter: drop-shadow(0 0 35px rgba(243, 229, 202, 0.85)) drop-shadow(0 0 50px rgba(212, 175, 55, 0.5));
+    opacity: 1;
+  }
+}
+
+.animate-bouquet-bloom {
+  animation: bouquetBloom 4.5s ease-in-out infinite;
+}
+
+/* Calm & Subtle Golden Flower Radiance */
+@keyframes flowerGlowCalm {
+  0%, 100% {
+    filter: brightness(1.05) contrast(1.05) drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
+    opacity: 0.55;
+  }
+  50% {
+    filter: brightness(1.18) contrast(1.1) drop-shadow(0 0 22px rgba(212, 175, 55, 0.6));
+    opacity: 0.75;
+  }
+}
+
+.animate-flower-glow-calm {
+  animation: flowerGlowCalm 6s ease-in-out infinite;
+}
+
+/* Realistic Floating Gold Ribbon Wave Motion Animation */
+@keyframes goldWaveFlow {
+  0% {
+    transform: translateY(0px) scale(1) rotate(0deg);
+    filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 10px rgba(212, 175, 55, 0.25));
+  }
+  50% {
+    transform: translateY(-16px) scale(1.04) rotate(1.5deg);
+    filter: brightness(1.28) contrast(1.25) drop-shadow(0 0 28px rgba(243, 229, 202, 0.5));
+  }
+  100% {
+    transform: translateY(0px) scale(1) rotate(0deg);
+    filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 10px rgba(212, 175, 55, 0.25));
+  }
+}
+
+@keyframes goldWaveFlowReverse {
+  0% {
+    transform: translateY(0px) scale(1.03) rotate(0deg);
+    filter: brightness(1.0) contrast(1.05);
+  }
+  50% {
+    transform: translateY(14px) scale(0.98) rotate(-1.5deg);
+    filter: brightness(1.2) contrast(1.15) drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+  }
+  100% {
+    transform: translateY(0px) scale(1.03) rotate(0deg);
+    filter: brightness(1.0) contrast(1.05);
+  }
+}
+
+.animate-gold-wave-flow {
+  animation: goldWaveFlow 14s ease-in-out infinite;
+}
+
+.animate-gold-wave-flow-reverse {
+  animation: goldWaveFlowReverse 18s ease-in-out infinite;
+}
+
+/* ============================================================
+   Override Browser Autofill Styling
+   Chrome/Edge memaksa background biru saat autofill —
+   satu-satunya cara override adalah via box-shadow inset
+   dan -webkit-text-fill-color untuk warna teks.
+   ============================================================ */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  /* Tutupi background biru autofill dengan warna gelap tema */
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  /* Warna teks tetap putih */
+  -webkit-text-fill-color: #ffffff !important;
+  /* Transisi halus saat autofill muncul */
+  transition: background-color 9999s ease-in-out 0s;
+  caret-color: #ffffff;
 }
